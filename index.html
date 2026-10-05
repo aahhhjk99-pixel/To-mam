@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="إلى أمي — من ولدها">
+
+<title>إلى أمي 🤍</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#050505;
+  --black2:#090909;
+  --white:#f5f0e8;
+  --soft:#d0c7ba;
+  --muted:#817a70;
+  --gold:#c8aa72;
+  --gold2:#8f764b;
+  --line:rgba(245,240,232,.10);
+  --glass:rgba(255,255,255,.025);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:"Cairo",sans-serif;
+  overflow-x:hidden;
+}
+
+body.lock{overflow:hidden;}
+
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(200,170,114,.08),transparent 27%),
+    radial-gradient(circle at 10% 90%,rgba(255,255,255,.025),transparent 25%),
+    #050505;
+}
+
+.bg-glow{
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(200,170,114,.035),transparent 68%);
+  top:15%;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+  z-index:-9;
+}
+
+.grain{
+  position:fixed;
+  inset:-50%;
+  width:200%;
+  height:200%;
+  pointer-events:none;
+  z-index:100;
+  opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:noise .25s steps(2) infinite;
+}
+
+@keyframes noise{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(2%,-1%)}
+  50%{transform:translate(-1%,2%)}
+  75%{transform:translate(1%,1%)}
+  100%{transform:translate(-2%,-2%)}
+}
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:#030303;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:opacity 1.6s ease,visibility 1.6s ease;
+}
+
+.intro.out{opacity:0;visibility:hidden;pointer-events:none;}
+
+.intro-content{
+  width:min(88%,650px);
+  animation:introAppear 2s ease both;
+}
+
+@keyframes introAppear{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:none;}
+}
+
+.intro-top{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:5px;
+  margin-bottom:32px;
+}
+
+.intro-title{
+  font-family:"Amiri",serif;
+  font-size:clamp(40px,10vw,76px);
+  font-weight:400;
+  line-height:1.4;
+}
+
+.intro-title span{display:block;color:var(--gold);}
+
+.intro-description{
+  margin:25px auto 40px;
+  max-width:420px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:2.2;
+}
+
+.start{
+  padding:15px 35px;
+  border-radius:50px;
+  border:1px solid rgba(200,170,114,.42);
+  background:rgba(200,170,114,.035);
+  color:var(--white);
+  font-family:"Cairo",sans-serif;
+  font-size:12px;
+  cursor:pointer;
+  transition:.5s ease;
+}
+
+.start:hover{
+  border-color:var(--gold);
+  background:rgba(200,170,114,.10);
+  box-shadow:0 15px 50px rgba(200,170,114,.08);
+  transform:translateY(-3px);
+}
+
+.intro-bottom{
+  margin-top:35px;
+  color:#514c45;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+.music{
+  position:fixed;
+  bottom:18px;
+  left:18px;
+  width:40px;
+  height:40px;
+  z-index:80;
+  border:1px solid rgba(245,240,232,.12);
+  border-radius:50%;
+  background:rgba(5,5,5,.7);
+  backdrop-filter:blur(12px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.7s;
+}
+
+.music.visible{opacity:.8;pointer-events:auto;}
+
+.bars{display:flex;align-items:center;gap:2px;height:15px;}
+
+.bars i{
+  display:block;
+  width:2px;
+  height:5px;
+  background:var(--gold);
+  animation:music 1s ease-in-out infinite alternate;
+}
+
+.bars i:nth-child(2){animation-delay:.15s}
+.bars i:nth-child(3){animation-delay:.3s}
+.bars i:nth-child(4){animation-delay:.45s}
+
+.music.paused i{animation-play-state:paused;}
+
+@keyframes music{
+  from{height:4px}
+  to{height:14px}
+}
+
+main{opacity:0;transition:opacity 2s ease;}
+main.active{opacity:1;}
+
+section{
+  width:min(100%,900px);
+  margin:auto;
+  padding:135px 25px;
+}
+
+.hero{
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+
+.hero-content{max-width:730px;}
+
+.kicker{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:5px;
+  margin-bottom:30px;
+}
+
+.hero h1{
+  font-family:"Amiri",serif;
+  font-weight:400;
+  font-size:clamp(43px,10vw,88px);
+  line-height:1.4;
+}
+
+.hero h1 span{color:var(--gold);display:block;}
+
+.hero-description{
+  max-width:540px;
+  margin:30px auto 0;
+  color:var(--soft);
+  font-family:"Amiri",serif;
+  font-size:19px;
+  line-height:2.3;
+}
+
+.scroll{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#5e5850;
+  font-size:8px;
+  letter-spacing:3px;
+  animation:scrollFloat 2.3s ease-in-out infinite;
+}
+
+@keyframes scrollFloat{
+  0%,100%{transform:translate(-50%,0)}
+  50%{transform:translate(-50%,8px)}
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:1.2s ease;
+}
+
+.reveal.show{opacity:1;transform:none;}
+
+.divider{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:13px;
+  margin-bottom:45px;
+}
+
+.divider-line{
+  height:1px;
+  width:65px;
+  background:linear-gradient(to left,transparent,var(--gold));
+}
+
+.divider-line:last-child{
+  background:linear-gradient(to right,transparent,var(--gold));
+}
+
+.dot{
+  width:4px;
+  height:4px;
+  background:var(--gold);
+  border-radius:50%;
+}
+
+.label{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:4px;
+  margin-bottom:24px;
+}
+
+.title{
+  font-family:"Amiri",serif;
+  font-size:clamp(32px,7vw,55px);
+  font-weight:400;
+  line-height:1.5;
+}
+
+.story{text-align:center;}
+
+.story-card{
+  margin-top:50px;
+  padding:45px 25px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.story-card p{
+  font-family:"Amiri",serif;
+  color:var(--soft);
+  font-size:clamp(19px,4.5vw,25px);
+  line-height:2.45;
+  margin-bottom:28px;
+}
+
+.story-card p:last-child{margin-bottom:0;}
+.story-card .bright{color:var(--white);}
+.story-card .gold{color:var(--gold);}
+
+.things{text-align:center;}
+
+.things-intro{
+  color:var(--muted);
+  font-family:"Amiri",serif;
+  font-size:18px;
+  line-height:2.2;
+  max-width:530px;
+  margin:25px auto 55px;
+}
+
+.thing-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.thing{
+  min-height:205px;
+  padding:28px 20px;
+  border:1px solid var(--line);
+  background:var(--glass);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  transition:.5s ease;
+}
+
+.thing:hover{
+  transform:translateY(-5px);
+  border-color:rgba(200,170,114,.3);
+  background:rgba(255,255,255,.04);
+}
+
+.number{
+  font-family:"Playfair Display",serif;
+  color:var(--gold);
+  font-style:italic;
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+.thing h3{
+  font-family:"Amiri",serif;
+  font-size:24px;
+  font-weight:400;
+  margin-bottom:10px;
+}
+
+.thing p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:2;
+}
+
+.son{text-align:center;}
+
+.son-box{
+  max-width:650px;
+  margin:45px auto 0;
+}
+
+.son-box p{
+  font-family:"Amiri",serif;
+  color:var(--soft);
+  font-size:clamp(20px,5vw,28px);
+  line-height:2.35;
+  margin-bottom:30px;
+}
+
+.son-box .strong{
+  color:var(--white);
+  font-size:clamp(25px,6vw,36px);
+}
+
+.son-box .gold{color:var(--gold);}
+
+.letter{text-align:right;}
+
+.letter-heading{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.letter-heading h2{
+  font-family:"Amiri",serif;
+  font-size:clamp(35px,8vw,62px);
+  font-weight:400;
+  line-height:1.4;
+}
+
+.letter-heading span{
+  display:block;
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+  font-size:14px;
+  font-style:italic;
+  margin-top:12px;
+  direction:ltr;
+}
+
+.paper{
+  position:relative;
+  padding:clamp(35px,7vw,68px);
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+}
+
+.paper:before,
+.paper:after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:30px;
+}
+
+.paper:before{
+  top:17px;
+  right:17px;
+  border-top:1px solid rgba(200,170,114,.35);
+  border-right:1px solid rgba(200,170,114,.35);
+}
+
+.paper:after{
+  bottom:17px;
+  left:17px;
+  border-bottom:1px solid rgba(200,170,114,.35);
+  border-left:1px solid rgba(200,170,114,.35);
+}
+
+.paper p{
+  font-family:"Amiri",serif;
+  color:var(--soft);
+  font-size:clamp(18px,4.4vw,24px);
+  line-height:2.45;
+  margin-bottom:30px;
+}
+
+.paper p:last-of-type{margin-bottom:0;}
+.paper .white{color:var(--white);}
+.paper .gold{color:var(--gold);}
+
+.signature{
+  margin-top:50px;
+  text-align:left;
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+  font-style:italic;
+  font-size:15px;
+  direction:ltr;
+}
+
+.pause{
+  min-height:65vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.pause-inner{max-width:650px;}
+
+.pause-inner .tiny{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:4px;
+  margin-bottom:30px;
+}
+
+.pause-inner p{
+  font-family:"Amiri",serif;
+  color:var(--white);
+  font-size:clamp(27px,7vw,43px);
+  line-height:1.9;
+}
+
+.pause-inner small{
+  display:block;
+  color:var(--muted);
+  margin-top:30px;
+  font-size:10px;
+}
+
+.final-door{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.final-inner{max-width:720px;}
+
+.heart{
+  width:58px;
+  height:58px;
+  border:1px solid rgba(200,170,114,.4);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 35px;
+  color:var(--gold);
+  font-size:20px;
+  box-shadow:0 0 45px rgba(200,170,114,.05);
+}
+
+.final-inner h2{
+  font-family:"Amiri",serif;
+  font-weight:400;
+  font-size:clamp(36px,8vw,65px);
+  line-height:1.5;
+}
+
+.final-inner h2 span{color:var(--gold);}
+
+.final-inner > p{
+  color:var(--soft);
+  font-family:"Amiri",serif;
+  font-size:20px;
+  line-height:2.2;
+  margin-top:25px;
+}
+
+.open-final{
+  margin-top:45px;
+  background:none;
+  border:0;
+  border-bottom:1px solid rgba(200,170,114,.5);
+  color:var(--white);
+  padding:10px 4px;
+  font-family:"Cairo",sans-serif;
+  font-size:12px;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.open-final:hover{color:var(--gold);}
+
+.secret{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:1.8s ease;
+}
+
+.secret.open{
+  max-height:800px;
+  opacity:1;
+  margin-top:50px;
+}
+
+.secret p{
+  font-family:"Amiri",serif;
+  font-size:clamp(22px,5.5vw,31px);
+  line-height:2.35;
+  color:var(--white);
+}
+
+.secret span{color:var(--gold);}
+
+.end{
+  min-height:100svh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.end-content{max-width:650px;}
+
+.end-line{
+  width:1px;
+  height:75px;
+  margin:0 auto 40px;
+  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+}
+
+.end h2{
+  font-family:"Amiri",serif;
+  font-weight:400;
+  font-size:clamp(43px,10vw,82px);
+  line-height:1.4;
+}
+
+.end h2 span{color:var(--gold);}
+
+.end p{
+  margin-top:28px;
+  color:var(--soft);
+  font-family:"Amiri",serif;
+  font-size:20px;
+  line-height:2.2;
+}
+
+.end-sign{
+  margin-top:60px;
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+  font-size:11px;
+  letter-spacing:4px;
+  direction:ltr;
+}
+
+.end-small{
+  margin-top:20px;
+  color:#4e4942;
+  font-size:9px;
+}
+
+@media(max-width:600px){
+  section{padding:115px 20px;}
+  .thing-grid{grid-template-columns:1fr;}
+  .thing{min-height:170px;}
+  .story-card{padding:38px 17px;}
+  .paper{padding:32px 22px;}
+  .music{left:13px;bottom:13px;}
+}
+</style>
+</head>
+
+<body class="lock">
+
+<div class="bg"></div>
+<div class="bg-glow"></div>
+<div class="grain"></div>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+
+  <div class="intro-content">
+
+    <div class="intro-top">
+      A LITTLE SOMETHING FOR YOU
+    </div>
+
+    <div class="intro-title">
+      إلى القلب
+      <span>اللي عمره ما بعد عليّ</span>
+    </div>
+
+    <p class="intro-description">
+      في كلام مرات ما نعرفوش نقولوه،
+      مش لأنه صعب...
+      لكن لأنه أكبر من الكلام.
+    </p>
+
+    <button class="start" id="start">
+      افتحيها بهدوء 🤍
+    </button>
+
+    <div class="intro-bottom">
+      TAKE YOUR TIME
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="audio" preload="auto" loop>
+  <source src="nuvole.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music" id="music">
+  <div class="bars">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-content reveal">
+
+    <div class="kicker">
+      TO THE ONE WHO MADE HOME FEEL LIKE HOME
+    </div>
+
+    <h1>
+      قبل ما تكوني أمي...
+      <span>كنتِ أول أمان عرفته.</span>
+    </h1>
+
+    <p class="hero-description">
+      ومهما كبرت، ومهما تبدلت الأيام،
+      بيبقى في داخلي إحساس يعرف وين الأمان...
+      ويعرف إن أمي هي المكان اللي نرجعله.
+    </p>
+
+  </div>
+
+  <div class="scroll">
+    SCROLL SLOWLY
+  </div>
+
+</section>
+
+
+<!-- STORY -->
+<section class="story">
+
+  <div class="reveal">
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="label">
+      THINGS I DON'T SAY ENOUGH
+    </div>
+
+    <h2 class="title">
+      في حاجات يمكن ما نقولهاش...
+      <br>
+      لكن نحسّها كل يوم.
+    </h2>
+
+    <div class="story-card">
+
+      <p>
+        نعرف إني مش دايمًا أسهل ولد في الدنيا.
+        مرات نغصّك، ومرات نعاند،
+        ومرات نتصرف بطريقة ما نستاهلش بعدها كل هالحنان.
+      </p>
+
+      <p>
+        لكن الحاجة اللي دايمًا تدهشني فيكِ،
+        إنك ما عمرّك خليتيني نحس إن محبتك ليا مرتبطة
+        بكوني كامل أو ما نغلطش.
+      </p>
+
+      <p>
+        حتى في اللحظات اللي نكون فيها غلطان،
+        نلقى منك نفس القلب...
+        <span class="gold">نفس الحنان، ونفس الأمان.</span>
+      </p>
+
+      <p class="bright">
+        ويمكن ما نقولهاش وقتها،
+        لكني نلاحظ كل حاجة.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LITTLE THINGS -->
+<section class="things">
+
+  <div class="reveal">
+
+    <div class="label">
+      THE LITTLE THINGS
+    </div>
+
+    <h2 class="title">
+      حاجات يمكن تشوفيها بسيطة...
+      <br>
+      وأنا نشوف فيها أمي.
+    </h2>
+
+    <p class="things-intro">
+      كل مرة تحاولي تفرحيني،
+      كل مرة ما تخليش حاجة نبيها في خاطري،
+      كل مرة تصبري عليّ...
+      يمكن نعدّيها عادي، لكن ما تعنيليش عادي.
+    </p>
+
+    <div class="thing-grid">
+
+      <div class="thing">
+        <div class="number">01</div>
+        <h3>حنانك</h3>
+        <p>
+          قلبك يفضل حنون حتى في الوقت اللي ما نكونش فيه حنين.
+        </p>
+      </div>
+
+      <div class="thing">
+        <div class="number">02</div>
+        <h3>صبرك</h3>
+        <p>
+          تصبري عليّ أكثر مما تتخيلي،
+          وأنا عارف إني مرات نختبر هالصبر 😅.
+        </p>
+      </div>
+
+      <div class="thing">
+        <div class="number">03</div>
+        <h3>وجودك</h3>
+        <p>
+          عمرك ما حسستيني بالبعد،
+          حتى لما أنا اللي نكون بعيد بدون قصد.
+        </p>
+      </div>
+
+      <div class="thing">
+        <div class="number">04</div>
+        <h3>قلبك</h3>
+        <p>
+          مهما صار، نلقى مكان عندك...
+          وهذا وحده نعمة كبيرة.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SON -->
+<section class="son">
+
+  <div class="reveal">
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="label">
+      FROM YOUR SON
+    </div>
+
+    <div class="son-box">
+
+      <p>
+        لو يوم شفتيني عصيتك،
+        أو زعلتك،
+        أو ما قدرتش نبيّنلك اللي في قلبي...
+      </p>
+
+      <p class="strong">
+        ما نبيكش تربطي لحظة مني
+        <span class="gold">بمكانتك عندي.</span>
+      </p>
+
+      <p>
+        لأن مكانك أكبر من أي غلطة،
+        وأكبر من أي كلمة تنقال في لحظة.
+      </p>
+
+      <p>
+        وأنا أكثر حاجة نتمناها
+        إني في يوم نخليك تشوفي فيا
+        الشخص اللي كنتِ دايمًا تستاهلي تفتخري بيه.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LETTER -->
+<section class="letter">
+
+  <div class="letter-heading reveal">
+
+    <div class="label">
+      A LETTER I SHOULD HAVE SAID LONG AGO
+    </div>
+
+    <h2>
+      ماما...
+    </h2>
+
+    <span>
+      Always, with love.
+    </span>
+
+  </div>
+
+  <div class="paper reveal">
+
+    <p>
+      ماما...
+    </p>
+
+    <p>
+      مرات نحاول نفكر في شن أكثر حاجة نقدر نشكرك عليها،
+      ونلقى روحي محتار، لأنك مش ديري حاجة وحدة نستحق نشكرك عليها.
+      إنتِ موجودة في تفاصيل كثيرة من حياتي،
+      في حاجات كبيرة وصغيرة،
+      في حاجات يمكن حتى إنتِ نسيتيها وأنا ما نسيتهاش.
+    </p>
+
+    <p>
+      يمكن مرات تشوفي ولدك عادي قدامك،
+      يتضايق، يضحك، يعاند، يطلب حاجاته،
+      وتكملي يومك...
+      لكن بالنسبة ليا، وجودك في حياتي مش حاجة عادية أبدًا.
+    </p>
+
+    <p>
+      إنتِ الإنسانة اللي عمرها ما خلتني نحس إني بعيد عليها.
+      مهما غلطت،
+      مهما تغير مزاجي،
+      مهما كنت صعب...
+      نلقى دايمًا بابك مفتوح وحنانك موجود.
+    </p>
+
+    <p class="white">
+      وأنا نحبك.
+      نحبك أكثر من الطريقة اللي نعرف نعبّر بيها.
+      وأكثر من أي رسالة نقدر نكتبها،
+      وحتى أكثر من أي مرة قلتلك فيها "نحبك".
+    </p>
+
+    <p>
+      ونعرف إني مرات نغصّك.
+      ونعرف إن في حاجات نديرها مش مفروض نديرها.
+      لكن والله يا ماما،
+      ما عمرها كانت من قلة حب،
+      وما عمرها كانت نيتي نوجع قلبك.
+    </p>
+
+    <p>
+      ولو في شيء نتمناه من قلبي،
+      فهو إنك ما تشوفيش أخطائي بس...
+      شوفي الولد اللي وراها،
+      اللي يحبك أكثر مما يقدر يشرح،
+      واللي مهما كبر،
+      يفضل محتاج وجود أمه.
+    </p>
+
+    <p>
+      ويمكن كوني ولدك الوحيد بين بناتك
+      يعطيني مكان مختلف في العائلة...
+      لكن الحقيقة؟
+      <span class="gold">
+        إنتِ عندك مكان مختلف تمامًا في قلبي.
+      </span>
+    </p>
+
+    <p>
+      ونبيك تفتخري بيا.
+      مش لأني كامل،
+      لكن لأني ولدك،
+      ونبي كل خطوة نمشيها لقدام تكون حاجة تخليك تبتسمي وتقولي:
+      "هذا ولدي."
+    </p>
+
+    <p class="white">
+      ولو خيروني نعيش نفس حياتي من جديد،
+      بنفس الأيام، بنفس كل شيء...
+      وأعطوني فرصة نختار أمي مرة ثانية،
+      ما نحتاجش حتى نفكر.
+    </p>
+
+    <p class="gold">
+      بنختارك إنتِ.
+      <br>
+      كل مرة.
+      <br>
+      بدون تردد.
+    </p>
+
+    <div class="signature">
+      Your son, always.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PAUSE -->
+<section class="pause">
+
+  <div class="pause-inner reveal">
+
+    <div class="tiny">
+      JUST ONE MORE THING
+    </div>
+
+    <p>
+      يمكن الكلام وقف هنا...
+      <br>
+      <span style="color:var(--gold)">
+        لكن عندي كلمة أخيرة.
+      </span>
+    </p>
+
+    <small>
+      DON'T LEAVE YET
+    </small>
+
+  </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section class="final-door">
+
+  <div class="final-inner reveal">
+
+    <div class="heart">
+      ♡
+    </div>
+
+    <h2>
+      في كلمة خليتها
+      <br>
+      <span>للآخر.</span>
+    </h2>
+
+    <p>
+      مش لأنها أصعب كلمة...
+      <br>
+      لكن لأنها أهم كلمة.
+    </p>
+
+    <button class="open-final" id="openFinal">
+      افتحي آخر حاجة 🤍
+    </button>
+
+    <div class="secret" id="secret">
+
+      <p>
+        ماما...
+        <br><br>
+
+        لو يومًا شكّيتي في مكانك عندي،
+        تذكري حاجة وحدة:
+        <br>
+
+        <span>إنتِ أغلى شي عندي.</span>
+
+        <br><br>
+
+        ولو يومًا حسّيتي إني بعيد،
+        تذكري إن في داخلي جزء صغير
+        عمره ما كبر...
+        جزء محتاج أمه،
+        محتاج صوتها،
+        ومحتاج يحس إنها موجودة.
+
+        <br><br>
+
+        ولو يومًا زعلتك،
+        سامحيني.
+
+        <br><br>
+
+        لأن آخر حاجة نبيها في الدنيا
+        إني نكون سبب في وجع قلبك.
+
+        <br><br>
+
+        <span>
+          ونبيك تعرفي إني نحبك...
+          أكثر مما قدرت نحكيه هنا.
+        </span>
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- END -->
+<section class="end">
+
+  <div class="end-content reveal">
+
+    <div class="end-line"></div>
+
+    <h2>
+      الحمدلله...
+      <br>
+      <span>إنك أمي.</span>
+    </h2>
+
+    <p>
+      ومهما كبرت،
+      ومهما تغيرت الدنيا،
+      ومهما خذتني الحياة بعيد...
+      <br>
+      بيبقى في شيء واحد ما يتغيرش:
+      <br><br>
+      <strong style="color:var(--white)">
+        إني ولدك.
+      </strong>
+    </p>
+
+    <div class="end-sign">
+      FOR YOU, ALWAYS.
+    </div>
+
+    <div class="end-small">
+      من ولدك 🤍
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<script>
+
+const intro = document.getElementById("intro");
+const start = document.getElementById("start");
+const main = document.getElementById("main");
+
+const audio = document.getElementById("audio");
+const music = document.getElementById("music");
+
+const openFinal = document.getElementById("openFinal");
+const secret = document.getElementById("secret");
+
+let started = false;
+
+
+/* START */
+
+start.addEventListener("click", ()=>{
+
+  if(started) return;
+
+  started = true;
+
+  /* الصفحة تتفتح أول حاجة، والموسيقى ما توقفش شي لو تعطلت */
+
+  intro.classList.add("out");
+
+  document.body.classList.remove("lock");
+
+  setTimeout(()=>{
+
+    main.classList.add("active");
+    music.classList.add("visible");
+
+  },600);
+
+  /* الصوت يبدأ داخل click event بدون ما نستناو نتيجته */
+
+  try{
+
+    audio.volume = 0;
+
+    const p = audio.play();
+
+    if(p && p.catch){
+      p.catch(e => console.log("Audio:",e));
+    }
+
+    let volume = 0;
+
+    const fadeIn = setInterval(()=>{
+
+      volume += .018;
+
+      if(volume >= .55){
+
+        volume = .55;
+
+        clearInterval(fadeIn);
+
+      }
+
+      audio.volume = volume;
+
+    },80);
+
+  }catch(e){
+
+    console.log("Audio:",e);
+
+  }
+
+});
+
+
+/* MUSIC BUTTON */
+
+music.addEventListener("click",()=>{
+
+  if(audio.paused){
+
+    const p = audio.play();
+
+    if(p && p.catch){
+      p.catch(()=>{});
+    }
+
+    music.classList.remove("paused");
+
+  }else{
+
+    audio.pause();
+    music.classList.add("paused");
+
+  }
+
+});
+
+
+/* REVEAL ON SCROLL */
+
+const observer = new IntersectionObserver((entries)=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      entry.target.classList.add("show");
+
+    }
+
+  });
+
+},{
+  threshold:.12
+});
+
+document.querySelectorAll(".reveal").forEach(element=>{
+  observer.observe(element);
+});
+
+
+/* FINAL SECRET */
+
+openFinal.addEventListener("click",()=>{
+
+  secret.classList.toggle("open");
+
+  if(secret.classList.contains("open")){
+
+    openFinal.textContent = "خليها توصل لقلبك 🤍";
+
+    setTimeout(()=>{
+
+      secret.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    },400);
+
+  }else{
+
+    openFinal.textContent = "افتحي آخر حاجة 🤍";
+
+  }
+
+});
+
+
+/* PAGE EXIT */
+
+window.addEventListener("pagehide",()=>{
+  audio.pause();
+});
+
+</script>
+
+</body>
+</html>
